@@ -1,0 +1,78 @@
+backend:
+  name: git-gateway
+  branch: main
+
+# Netlify Identity + Git Gateway でログインしたユーザーが
+# ここでの編集をそのまま GitHub リポジトリへコミットします。
+# セットアップ手順は README.md の「Netlify + Decap CMS で管理画面を使う」を参照。
+
+media_folder: "assets/images/uploads"
+public_folder: "/assets/images/uploads"
+
+collections:
+  - name: "site_data"
+    label: "サイトデータ"
+    files:
+      - file: "data/works.json"
+        label: "作品・About情報"
+        name: "site_data"
+        fields:
+          - label: "ヒーロー動画"
+            name: "hero"
+            widget: "object"
+            fields:
+              - label: "動画(mp4)一覧 — 上から順に自動再生されます"
+                name: "videos"
+                widget: "list"
+                field: { label: "動画パス/URL", name: "video", widget: "string" }
+
+          - label: "About"
+            name: "about"
+            widget: "object"
+            fields:
+              - { label: "名前", name: "name", widget: "string" }
+              - { label: "肩書き", name: "role", widget: "string" }
+              - { label: "一言ステートメント", name: "statement", widget: "text" }
+              - label: "経歴・自己紹介(段落ごとに追加)"
+                name: "bio"
+                widget: "list"
+                field: { label: "段落", name: "paragraph", widget: "text" }
+              - { label: "メールアドレス(クリックでコピーされます)", name: "email", widget: "string" }
+              - label: "SNS・外部リンク"
+                name: "links"
+                widget: "list"
+                fields:
+                  - { label: "表示名", name: "label", widget: "string" }
+                  - { label: "URL", name: "url", widget: "string" }
+
+          - label: "作品一覧"
+            name: "works"
+            widget: "list"
+            summary: "{{fields.category}} — {{fields.title}}"
+            fields:
+              - { label: "タイトル(空欄でもYouTube/Vimeoは自動取得を試みます)", name: "title", widget: "string", required: false }
+              - label: "カテゴリ"
+                name: "category"
+                widget: "select"
+                options: ["REELS", "STILLS", "CINEMATOGRAPHY"]
+              - label: "種類"
+                name: "platform"
+                widget: "select"
+                options:
+                  - { label: "YouTube", value: "youtube" }
+                  - { label: "Vimeo", value: "vimeo" }
+                  - { label: "ArtStation / 画像", value: "artstation" }
+              - label: "元のページURL(YouTube/Vimeo/ArtStationのURLをそのまま貼る)"
+                name: "sourceUrl"
+                widget: "string"
+              - label: "サムネイル画像(ArtStationは必須。YouTube/Vimeoは空欄なら自動取得)"
+                name: "thumbnail"
+                widget: "image"
+                required: false
+              - label: "追加日"
+                name: "addedAt"
+                widget: "datetime"
+                format: "YYYY-MM-DD"
+                date_format: "YYYY-MM-DD"
+                time_format: false
+                default: ""

@@ -1,7 +1,10 @@
 /* works.js
  * data/works.json を読み込み、作品グリッドとヒーロー動画を描画する。
- * 新しい作品を追加したいときは data/works.json を編集するか、
- * scripts/add-work.mjs を使う(README参照)。
+ * 新しい作品を追加したいときは /admin/ の管理画面(Decap CMS)を使うか、
+ * data/works.json を直接編集するか、scripts/add-work.mjs を使う(README参照)。
+ *
+ * タイトル・サムネイルが未入力のYouTube/Vimeo作品は、oEmbedから自動取得する。
+ * ArtStationは外部からの直接取得(CORS)ができないため、CMS側での手入力が必要。
  */
 
 const DATA_URL = 'data/works.json';
@@ -17,10 +20,84 @@ window.PortfolioData = (async function loadPortfolioData(){
   }
 })();
 
+const oembedCache = new Map();
+
+function extractYouTubeId(sourceUrl){
+  try{
+    const url = new URL(sourceUrl);
+    if(url.hostname.includes('youtu.be')) return url.pathname.slice(1);
+    if(url.searchParams.get('v')) return url.searchParams.get('v');
+    const shorts = url.pathname.match(/\/shorts\/([^/]+)/);
+    if(shorts) return shorts[1];
+  }catch{ /* 無効なURL */ }
+  return null;
+}
+
+function extractVimeoId(sourceUrl){
+  try{
+    const url = new URL(sourceUrl);
+    return url.pathname.split('/').filter(Boolean)[0] || null;
+  }catch{
+    return null;
+  }
+}
+
+// 保存済みの embedUrl があればそれを使い、無ければ sourceUrl から組み立てる
+function deriveEmbedUrl(work){
+  if(work.embedUrl) return work.embedUrl;
+  if(work.platform === 'youtube'){
+    const id = extractYouTubeId(work.sourceUrl);
+    return id ? `https://www.youtube.com/embed/${id}` : '';
+  }
+  if(work.platform === 'vimeo'){
+    const id = extractVimeoId(work.sourceUrl);
+    return id ? `https://player.vimeo.com/video/${id}` : '';
+  }
+  return '';
+}
+
+function fetchOEmbed(work){
+  if(oembedCache.has(work.sourceUrl)) return oembedCache.get(work.sourceUrl);
+
+  let promise;
+  if(work.platform === 'youtube'){
+    promise = fetch(`https://www.youtube.com/oembed?url=${encodeURIComponent(work.sourceUrl)}&format=json`)
+      .then(r => (r.ok ? r.json() : null)).catch(() => null);
+  }else if(work.platform === 'vimeo'){
+    promise = fetch(`https://vimeo.com/api/oembed.json?url=${encodeURIComponent(work.sourceUrl)}`)
+      .then(r => (r.ok ? r.json() : null)).catch(() => null);
+  }else{
+    promise = Promise.resolve(null);
+  }
+  oembedCache.set(work.sourceUrl, promise);
+  return promise;
+}
+
+// タイトル・サムネイルが空の作品を、可能な範囲で自動補完する
+async function enrichWork(work){
+  if(work.platform === 'youtube' && !work.thumbnail){
+    const id = extractYouTubeId(work.sourceUrl);
+    if(id) work.thumbnail = `https://img.youtube.com/vi/${id}/maxresdefault.jpg`;
+  }
+
+  const needsMeta = (!work.title || !work.thumbnail) && (work.platform === 'youtube' || work.platform === 'vimeo');
+  if(needsMeta){
+    const meta = await fetchOEmbed(work);
+    if(meta){
+      if(!work.title) work.title = meta.title || work.title;
+      if(!work.thumbnail) work.thumbnail = meta.thumbnail_url || work.thumbnail;
+    }
+  }
+
+  if(!work.title) work.title = 'Untitled';
+  if(!work.thumbnail) work.thumbnail = 'https://placehold.co/1200x750/131416/c9a063?text=No+Image';
+  return work;
+}
+
 function buildCard(work){
   const card = document.createElement('div');
   card.className = 'work-card';
-  card.dataset.workId = work.id;
+  card.dataset.workId = work.id || work.title;
 
   const img = document.createElement('img');
   img.src = work.thumbnail;
@@ -72,7 +149,7 @@ function openLightbox(work){
     const ratioBox = document.createElement('div');
     ratioBox.className = 'ratio-box';
     const iframe = document.createElement('iframe');
-    iframe.src = work.embedUrl;
+    iframe.src = deriveEmbedUrl(work);
     iframe.allow = 'autoplay; fullscreen; picture-in-picture';
     iframe.allowFullscreen = true;
     ratioBox.appendChild(iframe);
@@ -162,7 +239,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   const data = await window.PortfolioData;
 
   if(document.querySelector('.works-grid[data-category]')){
-    renderGrids(data.works || []);
+    const works = await Promise.all((data.works || []).map(w => enrichWork({ ...w })));
+    renderGrids(works);
   }
   initHero((data.hero && data.hero.videos) || []);
 

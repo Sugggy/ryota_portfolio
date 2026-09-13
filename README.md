@@ -79,6 +79,29 @@ ArtStationは公式のoEmbedが無いため、ページのOGPタグ(og:title / o
 
 独自ドメインを使う場合はリポジトリ直下に `CNAME` ファイルを追加してください。
 
+## Netlify + Decap CMS で管理画面から更新する
+
+`/admin/` にブラウザからログインし、フォーム入力だけで `data/works.json` を更新・コミットできます(ArtstationやWordPressの管理画面に近い体験)。設定は一度だけでOKです。
+
+1. GitHubにこのリポジトリをpushする
+2. [Netlify](https://app.netlify.com) で **Add new site → Import an existing project** からこのリポジトリを選ぶ
+   - Build command: 空欄のまま / Publish directory: `.`(このリポジトリはビルド不要)
+3. デプロイ後、Netlifyのサイト管理画面 → **Site configuration → Identity** → **Enable Identity**
+4. 同じ Identity 設定内の **Registration** を `Invite only` にする(誰でもサインアップできないようにするため)
+5. **Identity → Services → Git Gateway** → **Enable Git Gateway**(NetlifyがGitHubへのコミット権限を仲介してくれるので、自分でGitHubのトークンを発行する必要はない)
+6. **Identity → Invite users** から自分のメールアドレスを招待する
+7. 届いたメールのリンクを開いてパスワードを設定すると、自動的に `https://<サイト名>.netlify.app/admin/` にログインした状態で移動する
+8. 以降は `https://<サイト名>.netlify.app/admin/` にアクセス → ログイン → 「作品一覧」から追加・編集 → 右上の **Publish** でGitHubに直接コミットされ、Netlifyが自動で再デプロイする
+
+### 入力のコツ
+
+- **YouTube / Vimeo**:「元のページURL」に普通の視聴URL(`https://youtu.be/xxxx` など)を貼るだけでOK。タイトル・サムネイルを空欄にしておくと、サイト側が表示時に自動取得します。
+- **ArtStation(STILLS)**:ブラウザから直接ArtStationの情報を取得することはできない(CORS制限)ため、タイトルとサムネイル画像は管理画面から手入力・アップロードしてください。
+- 画像をアップロードすると `assets/images/uploads/` に保存され、自動でパスが入力されます。
+- 「元のページURL」だけ入っていてタイトル・サムネイルが空のYouTube/Vimeo作品は、閲覧者のブラウザ側で毎回oEmbedを取得するため表示がわずかに遅れます。頻繁に見られるページでは、一度CMSで開いて保存し直すとタイトル・サムネイルが固定されて速くなります。
+
+なお `/admin/` はGitHub Pagesでは動作しません(Netlify Identity/Git Gatewayが必要)。この管理画面を使う場合は公開先もNetlifyにしてください。
+
 ## 今後よく触る場所
 
 - 新しい作品を追加したい → `node scripts/add-work.mjs <URL> <カテゴリ>`
