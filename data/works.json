@@ -1,0 +1,57 @@
+{
+  "hero": {
+    "videos": [
+      "assets/videos/hero-01.mp4",
+      "assets/videos/hero-02.mp4",
+      "assets/videos/hero-03.mp4"
+    ]
+  },
+  "about": {
+    "name": "Ryota",
+    "role": "Director of Photography / Visual Artist",
+    "statement": "映像と静止画の間にある質感を探しながら制作しています。プロジェクトのご相談はお気軽にどうぞ。",
+    "bio": [
+      "ここに経歴や制作スタンスを書きます。2〜4段落程度が読みやすい目安です。",
+      "参加した作品、受賞歴、使用機材など、見る人に伝えたい情報を自由に追加してください。"
+    ],
+    "email": "your.email@gmail.com",
+    "links": [
+      { "label": "ArtStation", "url": "https://www.artstation.com/yourprofile" },
+      { "label": "X", "url": "https://x.com/yourhandle" },
+      { "label": "Instagram", "url": "https://www.instagram.com/yourhandle" },
+      { "label": "YouTube", "url": "https://www.youtube.com/@yourhandle" }
+    ]
+  },
+  "works": [
+    {
+      "id": "sample-reel-01",
+      "title": "Sample Reel — Placeholder",
+      "category": "REELS",
+      "platform": "youtube",
+      "sourceUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "embedUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+      "thumbnail": "https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg",
+      "addedAt": "2026-09-13"
+    },
+    {
+      "id": "sample-still-01",
+      "title": "Sample Still — Placeholder",
+      "category": "STILLS",
+      "platform": "artstation",
+      "sourceUrl": "https://www.artstation.com/",
+      "embedUrl": "",
+      "thumbnail": "https://placehold.co/1200x1500/0b0c0d/c9a063?text=Still",
+      "addedAt": "2026-09-13"
+    },
+    {
+      "id": "sample-cinematography-01",
+      "title": "Sample Cinematography — Placeholder",
+      "category": "CINEMATOGRAPHY",
+      "platform": "vimeo",
+      "sourceUrl": "https://vimeo.com/",
+      "embedUrl": "",
+      "thumbnail": "https://placehold.co/1600x900/0b0c0d/c9a063?text=Cinematography",
+      "addedAt": "2026-09-13"
+    }
+  ]
+}

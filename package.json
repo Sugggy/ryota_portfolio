@@ -1,0 +1,14 @@
+{
+  "name": "portfolio-site",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Ryota's portfolio site (static, GitHub Pages)",
+  "scripts": {
+    "add-work": "node scripts/add-work.mjs",
+    "start": "npx --yes serve ."
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
