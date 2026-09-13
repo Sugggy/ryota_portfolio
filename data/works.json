@@ -7,19 +7,31 @@
     ]
   },
   "about": {
-    "name": "Ryota",
-    "role": "Director of Photography / Visual Artist",
-    "statement": "映像と静止画の間にある質感を探しながら制作しています。プロジェクトのご相談はお気軽にどうぞ。",
+    "name": "Ryota Sugisaki",
+    "role": "Environment Artist / Photographer",
+    "statement": "映画を意識したスケール感のある大規模シーンを中心に制作しています。プロシージャルな手法を用いた背景制作と、最終的に映像作品として成立する完成度の両立を重視しています。",
     "bio": [
       "ここに経歴や制作スタンスを書きます。2〜4段落程度が読みやすい目安です。",
       "参加した作品、受賞歴、使用機材など、見る人に伝えたい情報を自由に追加してください。"
     ],
     "email": "your.email@gmail.com",
     "links": [
-      { "label": "ArtStation", "url": "https://www.artstation.com/yourprofile" },
-      { "label": "X", "url": "https://x.com/yourhandle" },
-      { "label": "Instagram", "url": "https://www.instagram.com/yourhandle" },
-      { "label": "YouTube", "url": "https://www.youtube.com/@yourhandle" }
+      {
+        "label": "ArtStation",
+        "url": "https://www.artstation.com/yourprofile"
+      },
+      {
+        "label": "X",
+        "url": "https://x.com/yourhandle"
+      },
+      {
+        "label": "Instagram",
+        "url": "https://www.instagram.com/yourhandle"
+      },
+      {
+        "label": "YouTube",
+        "url": "https://www.youtube.com/@yourhandle"
+      }
     ]
   },
   "works": [
