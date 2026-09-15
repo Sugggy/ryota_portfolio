@@ -16,7 +16,7 @@ window.PortfolioData = (async function loadPortfolioData(){
     return await res.json();
   }catch(err){
     console.error(err);
-    return { hero: { videos: [] }, about: null, works: [] };
+    return { hero: { videos: [] }, about: null, worksReels: [], worksStills: [], worksCinematography: [] };
   }
 })();
 
@@ -207,28 +207,41 @@ function initHero(videoUrls){
     return v;
   });
 
+  if(videos.length === 1){
+    videos[0].loop = true;
+    videos[0].play().catch(() => {});
+    return;
+  }
+
   let current = 0;
+  let failStreak = 0; // 連続で何本再生に失敗したかを数える(壊れた動画で無限に固まるのを防ぐ)
 
   function play(index){
     videos.forEach((v, i) => v.classList.toggle('is-active', i === index));
     const v = videos[index];
     v.preload = 'auto';
     v.currentTime = 0;
-    v.play().catch(() => {});
+    const playPromise = v.play();
+    if(playPromise && playPromise.catch) playPromise.catch(() => advance());
+  }
+
+  function advance(){
+    failStreak++;
+    if(failStreak >= videos.length) return; // 1周してどれも再生できない場合のみ諦める
+    current = (current + 1) % videos.length;
+    play(current);
   }
 
   videos.forEach((v, i) => {
     v.addEventListener('ended', () => {
-      current = (i + 1) % videos.length;
+      if(i !== current) return;
+      failStreak = 0; // 1本でも最後まで再生できたら失敗カウントをリセット(ループを継続させる)
+      current = (current + 1) % videos.length;
       play(current);
     });
-    // 動画ファイルがまだ無い/読み込みに失敗した場合は次の動画へスキップする
     v.addEventListener('error', () => {
-      if(videos.every(video => video.error)) return; // 全滅なら何もしない(黒背景のまま)
-      if(i === current){
-        current = (i + 1) % videos.length;
-        play(current);
-      }
+      if(i !== current) return;
+      advance();
     });
   });
 
@@ -238,11 +251,26 @@ function initHero(videoUrls){
 document.addEventListener('DOMContentLoaded', async () => {
   const data = await window.PortfolioData;
 
+  // 3つに分かれた作品リスト(worksReels/worksStills/worksCinematography)を
+  // カテゴリ情報付きの1本の配列にまとめる
+  const works = [
+    ...(data.worksReels || []).map(w => ({ ...w, category: 'REELS' })),
+    ...(data.worksStills || []).map(w => ({ ...w, category: 'STILLS' })),
+    ...(data.worksCinematography || []).map(w => ({ ...w, category: 'CINEMATOGRAPHY' }))
+  ];
+
   if(document.querySelector('.works-grid[data-category]')){
-    const works = await Promise.all((data.works || []).map(w => enrichWork({ ...w })));
-    renderGrids(works);
+    const enriched = await Promise.all(works.map(w => enrichWork({ ...w })));
+    renderGrids(enriched);
   }
   initHero((data.hero && data.hero.videos) || []);
+
+  const heroName = document.getElementById('hero-name');
+  const heroRole = document.getElementById('hero-role');
+  if(data.about){
+    if(heroName && data.about.name) heroName.textContent = data.about.name;
+    if(heroRole && data.about.role) heroRole.textContent = data.about.role;
+  }
 
   const closeBtn = document.getElementById('lightbox-close');
   const lightbox = document.getElementById('lightbox');

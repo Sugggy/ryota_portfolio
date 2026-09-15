@@ -1,5 +1,37 @@
 document.getElementById('year').textContent = new Date().getFullYear();
 
+/* ダーク/ライト切り替え(選択内容はブラウザに保存され、次回訪問時も保持される) */
+(function initTheme(){
+  const root = document.documentElement;
+  const toggle = document.getElementById('theme-toggle');
+  const icon = document.getElementById('theme-toggle-icon');
+  const STORAGE_KEY = 'portfolio-theme';
+
+  function applyTheme(theme){
+    if(theme === 'light'){
+      root.setAttribute('data-theme', 'light');
+      if(icon) icon.textContent = '☀';
+    }else{
+      root.removeAttribute('data-theme');
+      if(icon) icon.textContent = '☾';
+    }
+  }
+
+  let saved = null;
+  try{ saved = localStorage.getItem(STORAGE_KEY); }catch{ /* プライベートモード等では無視 */ }
+  const prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+  applyTheme(saved || (prefersLight ? 'light' : 'dark'));
+
+  if(toggle){
+    toggle.addEventListener('click', () => {
+      const isLight = root.getAttribute('data-theme') === 'light';
+      const next = isLight ? 'dark' : 'light';
+      applyTheme(next);
+      try{ localStorage.setItem(STORAGE_KEY, next); }catch{ /* 保存できなくても表示切替は継続 */ }
+    });
+  }
+})();
+
 const nav = document.getElementById('site-nav');
 const toggle = document.getElementById('nav-toggle');
 const links = document.getElementById('nav-links');

@@ -34,6 +34,7 @@ async function main(){
     console.error(`カテゴリは ${CATEGORIES.join(' / ')} のいずれかを指定してください。`);
     process.exit(1);
   }
+  const listKey = { REELS: 'worksReels', STILLS: 'worksStills', CINEMATOGRAPHY: 'worksCinematography' }[category];
 
   let url;
   try{
@@ -53,9 +54,9 @@ async function main(){
   const meta = await fetchMeta(platform, url);
 
   const db = JSON.parse(await readFile(DATA_PATH, 'utf-8'));
-  db.works = db.works || [];
+  db[listKey] = db[listKey] || [];
 
-  if(db.works.some(w => w.sourceUrl === url.toString())){
+  if(db[listKey].some(w => w.sourceUrl === url.toString())){
     console.log('このURLは既に登録されています。処理を中止しました。');
     return;
   }
@@ -63,7 +64,6 @@ async function main(){
   const entry = {
     id: slugify(meta.title) + '-' + Date.now().toString(36),
     title: meta.title,
-    category,
     platform,
     sourceUrl: url.toString(),
     embedUrl: meta.embedUrl || '',
@@ -71,12 +71,12 @@ async function main(){
     addedAt: new Date().toISOString().slice(0, 10)
   };
 
-  db.works.push(entry);
+  db[listKey].push(entry);
   await writeFile(DATA_PATH, JSON.stringify(db, null, 2) + '\n', 'utf-8');
 
   console.log('追加しました:');
   console.log(`  タイトル: ${entry.title}`);
-  console.log(`  カテゴリ: ${entry.category}`);
+  console.log(`  カテゴリ: ${category}`);
   console.log(`  サムネイル: ${entry.thumbnail || '(取得できませんでした。data/works.json を手動で編集してください)'}`);
 }
 

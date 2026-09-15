@@ -38,6 +38,7 @@ collections:
                 widget: "list"
                 field: { label: "段落", name: "paragraph", widget: "text" }
               - { label: "メールアドレス(クリックでコピーされます)", name: "email", widget: "string" }
+              - { label: "プロフィール写真", name: "photo", widget: "image", required: false }
               - label: "SNS・外部リンク"
                 name: "links"
                 widget: "list"
@@ -45,27 +46,76 @@ collections:
                   - { label: "表示名", name: "label", widget: "string" }
                   - { label: "URL", name: "url", widget: "string" }
 
-          - label: "作品一覧"
-            name: "works"
+          - label: "REELS作品"
+            name: "worksReels"
             widget: "list"
-            summary: "{{fields.category}} — {{fields.title}}"
+            summary: "{{fields.title}}"
             fields:
               - { label: "タイトル(空欄でもYouTube/Vimeoは自動取得を試みます)", name: "title", widget: "string", required: false }
-              - label: "カテゴリ"
-                name: "category"
-                widget: "select"
-                options: ["REELS", "STILLS", "CINEMATOGRAPHY"]
               - label: "種類"
                 name: "platform"
                 widget: "select"
+                default: "youtube"
                 options:
                   - { label: "YouTube", value: "youtube" }
                   - { label: "Vimeo", value: "vimeo" }
-                  - { label: "ArtStation / 画像", value: "artstation" }
-              - label: "元のページURL(YouTube/Vimeo/ArtStationのURLをそのまま貼る)"
+              - label: "元のページURL(YouTube/VimeoのURLをそのまま貼る)"
                 name: "sourceUrl"
                 widget: "string"
-              - label: "サムネイル画像(ArtStationは必須。YouTube/Vimeoは空欄なら自動取得)"
+              - label: "サムネイル画像(空欄ならYouTube/Vimeoから自動取得)"
+                name: "thumbnail"
+                widget: "image"
+                required: false
+              - label: "追加日"
+                name: "addedAt"
+                widget: "datetime"
+                format: "YYYY-MM-DD"
+                date_format: "YYYY-MM-DD"
+                time_format: false
+                default: ""
+
+          - label: "STILLS作品"
+            name: "worksStills"
+            widget: "list"
+            summary: "{{fields.title}}"
+            fields:
+              - { label: "タイトル", name: "title", widget: "string" }
+              - label: "種類"
+                name: "platform"
+                widget: "select"
+                default: "artstation"
+                options:
+                  - { label: "ArtStation / 画像", value: "artstation" }
+              - label: "元のページURL(任意。ArtStationの作品ページなど)"
+                name: "sourceUrl"
+                widget: "string"
+                required: false
+              - { label: "サムネイル画像", name: "thumbnail", widget: "image" }
+              - label: "追加日"
+                name: "addedAt"
+                widget: "datetime"
+                format: "YYYY-MM-DD"
+                date_format: "YYYY-MM-DD"
+                time_format: false
+                default: ""
+
+          - label: "CINEMATOGRAPHY作品"
+            name: "worksCinematography"
+            widget: "list"
+            summary: "{{fields.title}}"
+            fields:
+              - { label: "タイトル(空欄でもYouTube/Vimeoは自動取得を試みます)", name: "title", widget: "string", required: false }
+              - label: "種類"
+                name: "platform"
+                widget: "select"
+                default: "vimeo"
+                options:
+                  - { label: "YouTube", value: "youtube" }
+                  - { label: "Vimeo", value: "vimeo" }
+              - label: "元のページURL(YouTube/VimeoのURLをそのまま貼る)"
+                name: "sourceUrl"
+                widget: "string"
+              - label: "サムネイル画像(空欄ならYouTube/Vimeoから自動取得)"
                 name: "thumbnail"
                 widget: "image"
                 required: false

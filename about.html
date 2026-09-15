@@ -16,12 +16,17 @@
   <button class="nav-toggle" id="nav-toggle" aria-label="メニューを開く" aria-expanded="false">
     <span></span><span></span><span></span>
   </button>
-  <nav class="nav-links" id="nav-links">
-    <a href="index.html#reels">Reels</a>
-    <a href="index.html#stills">Stills</a>
-    <a href="index.html#cinematography">Cinematography</a>
-    <a href="about.html" class="is-active">About</a>
-  </nav>
+  <div class="nav-right">
+    <nav class="nav-links" id="nav-links">
+      <a href="index.html#reels">Reels</a>
+      <a href="index.html#stills">Stills</a>
+      <a href="index.html#cinematography">Cinematography</a>
+      <a href="about.html" class="is-active">About</a>
+    </nav>
+    <button class="theme-toggle" id="theme-toggle" aria-label="ダーク/ライト表示を切り替え" type="button">
+      <span id="theme-toggle-icon" aria-hidden="true">☾</span>
+    </button>
+  </div>
 </header>
 
 <main class="about-main">
@@ -32,7 +37,10 @@
   </section>
 
   <section class="about-body">
-    <div class="about-bio" id="about-bio"></div>
+    <div class="about-bio">
+      <img class="about-photo" id="about-photo" alt="" hidden>
+      <div id="about-bio-text"></div>
+    </div>
 
     <div class="about-contact">
       <h2>Contact</h2>
@@ -47,7 +55,7 @@
 </main>
 
 <footer class="site-footer">
-  <span>&copy; <span id="year"></span> Ryota</span>
+  <span>&copy; <span id="year"></span> Ryota Sugisaki</span>
   <a href="index.html">Back to Work</a>
 </footer>
 

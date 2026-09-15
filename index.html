@@ -17,12 +17,17 @@
   <button class="nav-toggle" id="nav-toggle" aria-label="メニューを開く" aria-expanded="false">
     <span></span><span></span><span></span>
   </button>
-  <nav class="nav-links" id="nav-links">
-    <a href="#reels" data-cat="REELS">Reels</a>
-    <a href="#stills" data-cat="STILLS">Stills</a>
-    <a href="#cinematography" data-cat="CINEMATOGRAPHY">Cinematography</a>
-    <a href="about.html">About</a>
-  </nav>
+  <div class="nav-right">
+    <nav class="nav-links" id="nav-links">
+      <a href="#reels" data-cat="REELS">Reels</a>
+      <a href="#stills" data-cat="STILLS">Stills</a>
+      <a href="#cinematography" data-cat="CINEMATOGRAPHY">Cinematography</a>
+      <a href="about.html">About</a>
+    </nav>
+    <button class="theme-toggle" id="theme-toggle" aria-label="ダーク/ライト表示を切り替え" type="button">
+      <span id="theme-toggle-icon" aria-hidden="true">☾</span>
+    </button>
+  </div>
 </header>
 
 <main>
@@ -31,8 +36,8 @@
     <div class="hero-video-stage" id="hero-video-stage"></div>
     <div class="hero-veil"></div>
     <div class="hero-content">
-      <h1>Ryota</h1>
-      <p class="hero-sub">Director of Photography / Visual Artist</p>
+      <h1 id="hero-name">Ryota</h1>
+      <p class="hero-sub" id="hero-role">Director of Photography / Visual Artist</p>
     </div>
     <a class="scroll-cue" href="#reels" aria-label="下にスクロール">
       <span></span>
@@ -64,7 +69,7 @@
   </section>
 
   <footer class="site-footer">
-    <span>&copy; <span id="year"></span> Ryota</span>
+    <span>&copy; <span id="year"></span> Ryota Sugisaki</span>
     <a href="about.html">About &amp; Contact</a>
   </footer>
 

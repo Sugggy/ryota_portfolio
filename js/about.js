@@ -7,12 +7,19 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.getElementById('about-name').textContent = about.name || '';
   document.getElementById('about-statement').textContent = about.statement || '';
 
-  const bioEl = document.getElementById('about-bio');
+  const bioEl = document.getElementById('about-bio-text');
   (about.bio || []).forEach(paragraph => {
     const p = document.createElement('p');
     p.textContent = paragraph;
     bioEl.appendChild(p);
   });
+
+  const photoEl = document.getElementById('about-photo');
+  if(photoEl && about.photo){
+    photoEl.src = about.photo;
+    photoEl.alt = about.name ? `${about.name}のポートレート` : '';
+    photoEl.hidden = false;
+  }
 
   document.getElementById('email-text').textContent = about.email || '';
 
