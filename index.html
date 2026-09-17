@@ -82,17 +82,5 @@
 
 <script src="js/works.js"></script>
 <script src="js/main.js"></script>
-<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-<script>
-  // 管理画面(/admin)への招待・ログインメールのリンクはここに戻ってくるため、
-  // ログイン完了後に自動で /admin/ へ移動させる。
-  if(window.netlifyIdentity){
-    window.netlifyIdentity.on('init', user => {
-      if(!user){
-        window.netlifyIdentity.on('login', () => { document.location.href = '/admin/'; });
-      }
-    });
-  }
-</script>
 </body>
 </html>

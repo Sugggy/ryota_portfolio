@@ -45,13 +45,12 @@ ArtStationは公式のoEmbedが無いため、ページのOGPタグ(og:title / o
 
 ### 方法B: JSONを直接編集する
 
-`data/works.json` の `works` 配列に、以下の形式でオブジェクトを追加するだけです。GitHub上のWebエディタ(リポジトリ画面で該当ファイルを開き鉛筆アイコンをクリック)からでも編集できます。
+`data/works.json` の `worksReels` / `worksStills` / `worksCinematography` のいずれかの配列に、以下の形式でオブジェクトを追加するだけです。GitHub上のWebエディタ(リポジトリ画面で該当ファイルを開き鉛筆アイコンをクリック)からでも編集できます。
 
 ```json
 {
   "id": "任意の一意なID",
   "title": "作品タイトル",
-  "category": "REELS",
   "platform": "youtube",
   "sourceUrl": "https://youtu.be/xxxxxxxxxxx",
   "embedUrl": "https://www.youtube.com/embed/xxxxxxxxxxx",
@@ -79,19 +78,21 @@ ArtStationは公式のoEmbedが無いため、ページのOGPタグ(og:title / o
 
 独自ドメインを使う場合はリポジトリ直下に `CNAME` ファイルを追加してください。
 
-## Netlify + Decap CMS で管理画面から更新する
+## Sveltia CMSで管理画面から更新する
 
-`/admin/` にブラウザからログインし、フォーム入力だけで `data/works.json` を更新・コミットできます(ArtstationやWordPressの管理画面に近い体験)。設定は一度だけでOKです。
+`/admin/` にブラウザからログインし、フォーム入力だけで `data/works.json` を更新・コミットできます(ArtstationやWordPressの管理画面に近い体験)。ホスティングはGitHub Pagesのままで、Netlifyは不要です。設定は一度だけでOKです。
 
-1. GitHubにこのリポジトリをpushする
-2. [Netlify](https://app.netlify.com) で **Add new site → Import an existing project** からこのリポジトリを選ぶ
-   - Build command: 空欄のまま / Publish directory: `.`(このリポジトリはビルド不要)
-3. デプロイ後、Netlifyのサイト管理画面 → **Site configuration → Identity** → **Enable Identity**
-4. 同じ Identity 設定内の **Registration** を `Invite only` にする(誰でもサインアップできないようにするため)
-5. **Identity → Services → Git Gateway** → **Enable Git Gateway**(NetlifyがGitHubへのコミット権限を仲介してくれるので、自分でGitHubのトークンを発行する必要はない)
-6. **Identity → Invite users** から自分のメールアドレスを招待する
-7. 届いたメールのリンクを開いてパスワードを設定すると、自動的に `https://<サイト名>.netlify.app/admin/` にログインした状態で移動する
-8. 以降は `https://<サイト名>.netlify.app/admin/` にアクセス → ログイン → 「作品一覧」から追加・編集 → 右上の **Publish** でGitHubに直接コミットされ、Netlifyが自動で再デプロイする
+1. GitHubの右上アイコン → **Settings** → 左メニュー最下部 **Developer settings** → **Personal access tokens** → **Fine-grained tokens** → **Generate new token**
+2. トークンの設定:
+   - Repository access: **Only select repositories** → `ryota_portfolio` を選択
+   - Permissions → **Repository permissions** → `Contents` を **Read and write** に変更
+   - 有効期限はお好みで(90日など。切れたら作り直せば大丈夫です)
+3. **Generate token** を押し、表示されたトークン(`github_pat_...`から始まる文字列)をコピーしておく(この画面を閉じると二度と表示されません)
+4. `https://<ユーザー名>.github.io/<リポジトリ名>/admin/` を開く
+5. Sveltia CMSのログイン画面で「Personal access token」を選び、3でコピーしたトークンを貼り付けてログイン
+6. 「REELS作品」「STILLS作品」「CINEMATOGRAPHY作品」「About」から編集 → 右上の **Publish**(または保存ボタン)でGitHubに直接コミットされ、GitHub Pagesが自動で再デプロイする
+
+トークンはブラウザに保存されるので、毎回貼り付ける必要はありません(有効期限が切れたら再発行してください)。
 
 ### 入力のコツ
 
@@ -99,8 +100,6 @@ ArtStationは公式のoEmbedが無いため、ページのOGPタグ(og:title / o
 - **ArtStation(STILLS)**:ブラウザから直接ArtStationの情報を取得することはできない(CORS制限)ため、タイトルとサムネイル画像は管理画面から手入力・アップロードしてください。
 - 画像をアップロードすると `assets/images/uploads/` に保存され、自動でパスが入力されます。
 - 「元のページURL」だけ入っていてタイトル・サムネイルが空のYouTube/Vimeo作品は、閲覧者のブラウザ側で毎回oEmbedを取得するため表示がわずかに遅れます。頻繁に見られるページでは、一度CMSで開いて保存し直すとタイトル・サムネイルが固定されて速くなります。
-
-なお `/admin/` はGitHub Pagesでは動作しません(Netlify Identity/Git Gatewayが必要)。この管理画面を使う場合は公開先もNetlifyにしてください。
 
 ## 今後よく触る場所
 

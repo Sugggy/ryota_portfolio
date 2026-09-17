@@ -1,10 +1,11 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: Sugggy/ryota_portfolio
   branch: main
 
-# Netlify Identity + Git Gateway でログインしたユーザーが
-# ここでの編集をそのまま GitHub リポジトリへコミットします。
-# セットアップ手順は README.md の「Netlify + Decap CMS で管理画面を使う」を参照。
+# Sveltia CMSがGitHubに直接コミットします(Netlifyは不要)。
+# ログインには自分のGitHub個人アクセストークン(Fine-grained PAT)を使います。
+# セットアップ手順は README.md の「Sveltia CMSで管理画面を使う」を参照。
 
 media_folder: "assets/images/uploads"
 public_folder: "/assets/images/uploads"
