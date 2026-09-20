@@ -91,9 +91,25 @@
       "title": "Labo",
       "platform": "artstation",
       "sourceUrl": "",
-      "thumbnail": "/assets/images/uploads/stills/Film/35/uploads_still_film_35_20260920_04.jpg",
+      "thumbnail": "assets/images/uploads/stills/Film/35/uploads_still_film_35_20260920_04.jpg",
       "description": "OLYMPUS TRIP35",
       "addedAt": "2026-09-20"
+    },
+    {
+      "title": "Warm Window",
+      "platform": "artstation",
+      "sourceUrl": "",
+      "thumbnail": "assets/images/uploads/stills/Film/120/uploads_still_film_120_20260920_04.jpg",
+      "description": "Minolta AUTOCORD",
+      "addedAt": "2026-09-21"
+    },
+    {
+      "title": "Highlight",
+      "platform": "artstation",
+      "sourceUrl": "",
+      "thumbnail": "assets/images/uploads/stills/Film/120/uploads_still_film_120_20260920_07.jpg",
+      "description": "Minolta AUTOCORD",
+      "addedAt": "2026-09-21"
     }
   ],
   "works": [
