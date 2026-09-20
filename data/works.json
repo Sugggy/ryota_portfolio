@@ -65,14 +65,14 @@
       "title": "Hong Kong Bay",
       "platform": "artstation",
       "sourceUrl": "",
-      "thumbnail": "/assets/images/uploads/stills/Digital/uploads_still_digital_20260920_11.jpg",
+      "thumbnail": "assets/images/uploads/stills/Digital/uploads_still_digital_20260920_11.jpg",
       "addedAt": "2026-09-20"
     },
     {
       "title": "Asakusa 120mm Film",
       "platform": "artstation",
       "sourceUrl": "",
-      "thumbnail": "/assets/images/uploads/stills/Film/120/uploads_still_film_120_20260920_02.jpg",
+      "thumbnail": "assets/images/uploads/stills/Film/120/uploads_still_film_120_20260920_02.jpg",
       "addedAt": "2026-09-20"
     }
   ],
