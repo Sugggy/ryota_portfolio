@@ -8,7 +8,7 @@ backend:
 # セットアップ手順は README.md の「Sveltia CMSで管理画面を使う」を参照。
 
 media_folder: "assets/images/uploads"
-public_folder: "/assets/images/uploads"
+public_folder: "assets/images/uploads"
 
 collections:
   - name: "site_data"
