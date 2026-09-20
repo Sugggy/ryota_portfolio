@@ -50,6 +50,7 @@
       "platform": "youtube",
       "sourceUrl": "https://youtu.be/gu6n2-JQLv0?si=aoVudRkolvolHC71",
       "thumbnail": "",
+      "description": "Personal Project",
       "addedAt": "2025-11-30"
     },
     {
@@ -57,6 +58,7 @@
       "platform": "youtube",
       "sourceUrl": "https://youtu.be/EvUnFGKgWUM?si=aO8TOsriG1HkWw90",
       "thumbnail": "",
+      "description": "I recreated a shot from the Battle of Scarif in Rogue One: A Star Wars Story.",
       "addedAt": "2025-07-11"
     }
   ],
@@ -66,6 +68,7 @@
       "platform": "artstation",
       "sourceUrl": "",
       "thumbnail": "assets/images/uploads/stills/Digital/uploads_still_digital_20260920_11.jpg",
+      "description": "",
       "addedAt": "2026-09-20"
     },
     {
@@ -73,16 +76,8 @@
       "platform": "artstation",
       "sourceUrl": "",
       "thumbnail": "assets/images/uploads/stills/Film/120/uploads_still_film_120_20260920_02.jpg",
+      "description": "",
       "addedAt": "2026-09-20"
-    }
-  ],
-  "worksCinematography": [
-    {
-      "title": "Test - Sci Fi Deco",
-      "platform": "youtube",
-      "sourceUrl": "https://youtu.be/M49jWf_pBi0?si=7iHrxvk1YWjVCKo7",
-      "thumbnail": "",
-      "addedAt": "2024-05-19"
     }
   ],
   "works": [
@@ -115,6 +110,15 @@
       "sourceUrl": "https://vimeo.com/",
       "thumbnail": "https://placehold.co/1600x900/0b0c0d/c9a063?text=Cinematography",
       "title": "Sample Cinematography — Placeholder"
+    }
+  ],
+  "worksCinematography": [
+    {
+      "addedAt": "2024-05-19",
+      "platform": "youtube",
+      "sourceUrl": "https://youtu.be/M49jWf_pBi0?si=7iHrxvk1YWjVCKo7",
+      "thumbnail": "",
+      "title": "Test - Sci Fi Deco"
     }
   ]
 }
