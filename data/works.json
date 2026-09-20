@@ -120,7 +120,63 @@
       "platform": "artstation",
       "sourceUrl": "",
       "thumbnail": "assets/images/uploads/stills/Digital/uploads_still_digital_20260920_13.jpg",
-      "description": "",
+      "description": "Sony a6700",
+      "addedAt": "2026-09-21"
+    },
+    {
+      "title": "Hong Kong Bay 2",
+      "platform": "artstation",
+      "sourceUrl": "",
+      "thumbnail": "assets/images/uploads/stills/Digital/uploads_still_digital_20260920_12.jpg",
+      "description": "Sony a6700",
+      "addedAt": "2026-09-21"
+    },
+    {
+      "title": "S Flow",
+      "platform": "artstation",
+      "sourceUrl": "",
+      "thumbnail": "assets/images/uploads/stills/Digital/uploads_still_digital_20260920_14.jpg",
+      "description": "Sony a6700\nHong Kong",
+      "addedAt": "2026-09-21"
+    },
+    {
+      "title": "Tokyo",
+      "platform": "artstation",
+      "sourceUrl": "",
+      "thumbnail": "assets/images/uploads/stills/Digital/uploads_still_digital_20260920_15.jpg",
+      "description": "Sony a6700",
+      "addedAt": "2026-09-21"
+    },
+    {
+      "title": "Ala-Kul Lake",
+      "platform": "artstation",
+      "sourceUrl": "",
+      "thumbnail": "assets/images/uploads/stills/Digital/uploads_still_digital_20260920_16.jpg",
+      "description": "Sony a6700",
+      "addedAt": "2026-09-21"
+    },
+    {
+      "title": "Ala Archa",
+      "platform": "artstation",
+      "sourceUrl": "",
+      "thumbnail": "assets/images/uploads/stills/Digital/uploads_still_digital_20260920_18.jpg",
+      "description": "Sony a6700",
+      "addedAt": "2026-09-21"
+    },
+    {
+      "title": "Kyrgyzstan Bazar",
+      "platform": "artstation",
+      "sourceUrl": "",
+      "thumbnail": "assets/images/uploads/stills/Film/120/uploads_still_film_120_20260920_13.jpg",
+      "description": "Minolta AUTOCORD",
+      "addedAt": "2026-09-21"
+    },
+    {
+      "title": "Daily",
+      "platform": "artstation",
+      "sourceUrl": "",
+      "thumbnail": "assets/images/uploads/stills/Film/120/uploads_still_film_120_20260920_06.jpg",
+      "description": "Minolta AUTOCORD",
       "addedAt": "2026-09-21"
     }
   ],
