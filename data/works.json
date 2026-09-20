@@ -16,6 +16,7 @@
       "参加した作品、受賞歴、使用機材など、見る人に伝えたい情報を自由に追加してください。"
     ],
     "email": "ryota.sugisaki.3dcg@gmail.com",
+    "photo": "assets/images/uploads/000001_Trim.jpg",
     "links": [
       {
         "label": "ArtStation",
@@ -36,40 +37,77 @@
       {
         "label": "Linkedin",
         "url": "https://www.linkedin.com/in/ryota-sugisaki/"
+      },
+      {
+        "label": "IMBd",
+        "url": "https://www.imdb.com/name/nm16957007/?ref_=ext_shr_lnk"
       }
-    ],
-    "photo": "assets/images/uploads/000001_Trim.jpg"
+    ]
   },
-  "works": [
+  "worksReels": [
     {
-      "id": "sample-reel-01",
-      "title": " Breath of the Ancient Earth",
-      "category": "REELS",
+      "title": "Breath of the Ancient Earth",
       "platform": "youtube",
-      "sourceUrl": "https://www.youtube.com/watch?v=gu6n2-JQLv0",
-      "embedUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+      "sourceUrl": "https://youtu.be/gu6n2-JQLv0?si=aoVudRkolvolHC71",
       "thumbnail": "",
       "addedAt": "2025-11-30"
     },
     {
-      "id": "sample-still-01",
-      "title": "Kyrgyzstan",
-      "category": "STILLS",
+      "title": "Rogue One - Battle of Scarif",
+      "platform": "youtube",
+      "sourceUrl": "https://youtu.be/EvUnFGKgWUM?si=aO8TOsriG1HkWw90",
+      "thumbnail": "",
+      "addedAt": "2025-07-11"
+    }
+  ],
+  "worksStills": [
+    {
+      "title": "Hong Kong Bay",
       "platform": "artstation",
-      "sourceUrl": "https://www.instagram.com/ryota_vfx/",
-      "embedUrl": "",
-      "thumbnail": "assets/images/stills/DSC03173.jpg",
-      "addedAt": "2026-09-13"
+      "sourceUrl": "",
+      "thumbnail": "/assets/images/uploads/stills/Digital/uploads_still_digital_20260920_11.jpg",
+      "addedAt": "2026-09-20"
+    }
+  ],
+  "worksCinematography": [
+    {
+      "title": "Test - Sci Fi Deco",
+      "platform": "youtube",
+      "sourceUrl": "https://youtu.be/M49jWf_pBi0?si=7iHrxvk1YWjVCKo7",
+      "thumbnail": "",
+      "addedAt": "2024-05-19"
+    }
+  ],
+  "works": [
+    {
+      "addedAt": "2025-11-30",
+      "category": "REELS",
+      "embedUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+      "id": "sample-reel-01",
+      "platform": "youtube",
+      "sourceUrl": "https://www.youtube.com/watch?v=gu6n2-JQLv0",
+      "thumbnail": "",
+      "title": "Breath of the Ancient Earth"
     },
     {
-      "id": "sample-cinematography-01",
-      "title": "Sample Cinematography — Placeholder",
+      "addedAt": "2026-09-13",
+      "category": "STILLS",
+      "embedUrl": "",
+      "id": "sample-still-01",
+      "platform": "artstation",
+      "sourceUrl": "https://www.instagram.com/ryota_vfx/",
+      "thumbnail": "assets/images/stills/DSC03173.jpg",
+      "title": "Kyrgyzstan"
+    },
+    {
+      "addedAt": "2026-09-13",
       "category": "CINEMATOGRAPHY",
+      "embedUrl": "",
+      "id": "sample-cinematography-01",
       "platform": "vimeo",
       "sourceUrl": "https://vimeo.com/",
-      "embedUrl": "",
       "thumbnail": "https://placehold.co/1600x900/0b0c0d/c9a063?text=Cinematography",
-      "addedAt": "2026-09-13"
+      "title": "Sample Cinematography — Placeholder"
     }
   ]
 }
