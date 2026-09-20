@@ -166,6 +166,22 @@ const PLATFORM_LABELS = {
   artstation: 'ArtStationで見る'
 };
 
+// テキスト中のURLを自動でリンク化する(HTMLエスケープしてからURL部分だけaタグに置き換える)
+function linkifyText(text){
+  const escaped = text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+  // URLとして許容する文字だけにマッチさせる(日本語や全角記号はここで自然に途切れる)
+  return escaped.replace(/(https?:\/\/[A-Za-z0-9\-._~:/?#[\]@!$&*+,;=%]+)/g, (url) => {
+    // 末尾に残りがちな句読点は除く
+    const trailingMatch = url.match(/[.,;:]+$/);
+    const trailing = trailingMatch ? trailingMatch[0] : '';
+    const cleanUrl = trailing ? url.slice(0, -trailing.length) : url;
+    return `<a href="${cleanUrl}" target="_blank" rel="noopener">${cleanUrl}</a>${trailing}`;
+  });
+}
+
 function openLightbox(work){
   const lightbox = document.getElementById('lightbox');
   const body = document.getElementById('lightbox-body');
@@ -212,7 +228,7 @@ function openLightbox(work){
   if(work.description){
     const descEl = document.createElement('p');
     descEl.className = 'lightbox-description';
-    descEl.textContent = work.description;
+    descEl.innerHTML = linkifyText(work.description);
     info.appendChild(descEl);
   }
 

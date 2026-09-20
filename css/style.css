@@ -377,6 +377,13 @@ img{ max-width: 100%; display: block; }
   line-height: 1.75;
   white-space: pre-line;
 }
+.lightbox-description a{
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  word-break: break-all;
+}
+.lightbox-description a:hover{ color: var(--text); }
 .lightbox-link{
   display: inline-block;
   margin-top: 20px;
