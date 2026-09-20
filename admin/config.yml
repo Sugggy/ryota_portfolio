@@ -52,7 +52,10 @@ collections:
             widget: "list"
             summary: "{{fields.title}}"
             fields:
-              - { label: "タイトル(空欄でもYouTube/Vimeoは自動取得を試みます)", name: "title", widget: "string", required: false }
+              - label: "タイトル(空欄でもYouTube/Vimeoは自動取得を試みます。ArtStationは必須)"
+                name: "title"
+                widget: "string"
+                required: false
               - label: "種類"
                 name: "platform"
                 widget: "select"
@@ -60,10 +63,11 @@ collections:
                 options:
                   - { label: "YouTube", value: "youtube" }
                   - { label: "Vimeo", value: "vimeo" }
-              - label: "元のページURL(YouTube/VimeoのURLをそのまま貼る)"
+                  - { label: "ArtStation / 画像", value: "artstation" }
+              - label: "元のページURL(YouTube/Vimeo/ArtStationのURLをそのまま貼る)"
                 name: "sourceUrl"
                 widget: "string"
-              - label: "サムネイル画像(空欄ならYouTube/Vimeoから自動取得)"
+              - label: "サムネイル画像(空欄ならYouTube/Vimeoから自動取得。ArtStationは必須)"
                 name: "thumbnail"
                 widget: "image"
                 required: false
@@ -92,34 +96,6 @@ collections:
                 widget: "string"
                 required: false
               - { label: "サムネイル画像", name: "thumbnail", widget: "image" }
-              - label: "追加日"
-                name: "addedAt"
-                widget: "datetime"
-                format: "YYYY-MM-DD"
-                date_format: "YYYY-MM-DD"
-                time_format: false
-                default: ""
-
-          - label: "CINEMATOGRAPHY作品"
-            name: "worksCinematography"
-            widget: "list"
-            summary: "{{fields.title}}"
-            fields:
-              - { label: "タイトル(空欄でもYouTube/Vimeoは自動取得を試みます)", name: "title", widget: "string", required: false }
-              - label: "種類"
-                name: "platform"
-                widget: "select"
-                default: "vimeo"
-                options:
-                  - { label: "YouTube", value: "youtube" }
-                  - { label: "Vimeo", value: "vimeo" }
-              - label: "元のページURL(YouTube/VimeoのURLをそのまま貼る)"
-                name: "sourceUrl"
-                widget: "string"
-              - label: "サムネイル画像(空欄ならYouTube/Vimeoから自動取得)"
-                name: "thumbnail"
-                widget: "image"
-                required: false
               - label: "追加日"
                 name: "addedAt"
                 widget: "datetime"

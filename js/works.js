@@ -16,7 +16,7 @@ window.PortfolioData = (async function loadPortfolioData(){
     return await res.json();
   }catch(err){
     console.error(err);
-    return { hero: { videos: [] }, about: null, worksReels: [], worksStills: [], worksCinematography: [] };
+    return { hero: { videos: [] }, about: null, worksReels: [], worksStills: [] };
   }
 })();
 
@@ -251,12 +251,10 @@ function initHero(videoUrls){
 document.addEventListener('DOMContentLoaded', async () => {
   const data = await window.PortfolioData;
 
-  // 3つに分かれた作品リスト(worksReels/worksStills/worksCinematography)を
-  // カテゴリ情報付きの1本の配列にまとめる
+  // 2つに分かれた作品リスト(worksReels/worksStills)をカテゴリ情報付きの1本の配列にまとめる
   const works = [
     ...(data.worksReels || []).map(w => ({ ...w, category: 'REELS' })),
-    ...(data.worksStills || []).map(w => ({ ...w, category: 'STILLS' })),
-    ...(data.worksCinematography || []).map(w => ({ ...w, category: 'CINEMATOGRAPHY' }))
+    ...(data.worksStills || []).map(w => ({ ...w, category: 'STILLS' }))
   ];
 
   if(document.querySelector('.works-grid[data-category]')){

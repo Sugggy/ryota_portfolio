@@ -1,11 +1,10 @@
 #!/usr/bin/env node
 /**
  * 使い方:
- *   node scripts/add-work.mjs <URL> <REELS|STILLS|CINEMATOGRAPHY>
+ *   node scripts/add-work.mjs <URL> <REELS|STILLS>
  *
  * 例:
  *   node scripts/add-work.mjs "https://youtu.be/xxxxxxxxxxx" REELS
- *   node scripts/add-work.mjs "https://vimeo.com/xxxxxxx" CINEMATOGRAPHY
  *   node scripts/add-work.mjs "https://www.artstation.com/artwork/xxxxxx" STILLS
  *
  * YouTube / Vimeo は oEmbed から、ArtStation はページの OGP タグから
@@ -19,13 +18,13 @@ import path from 'node:path';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const DATA_PATH = path.join(__dirname, '..', 'data', 'works.json');
-const CATEGORIES = ['REELS', 'STILLS', 'CINEMATOGRAPHY'];
+const CATEGORIES = ['REELS', 'STILLS'];
 
 async function main(){
   const [, , rawUrl, rawCategory] = process.argv;
 
   if(!rawUrl || !rawCategory){
-    console.error('使い方: node scripts/add-work.mjs <URL> <REELS|STILLS|CINEMATOGRAPHY>');
+    console.error('使い方: node scripts/add-work.mjs <URL> <REELS|STILLS>');
     process.exit(1);
   }
 
@@ -34,7 +33,7 @@ async function main(){
     console.error(`カテゴリは ${CATEGORIES.join(' / ')} のいずれかを指定してください。`);
     process.exit(1);
   }
-  const listKey = { REELS: 'worksReels', STILLS: 'worksStills', CINEMATOGRAPHY: 'worksCinematography' }[category];
+  const listKey = { REELS: 'worksReels', STILLS: 'worksStills' }[category];
 
   let url;
   try{
