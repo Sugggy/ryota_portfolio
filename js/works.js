@@ -94,21 +94,43 @@ async function enrichWork(work){
   return work;
 }
 
+function formatDate(dateStr){
+  if(!dateStr) return '';
+  const m = String(dateStr).match(/^(\d{4})-(\d{2})-(\d{2})/);
+  return m ? `${m[1]}.${m[2]}.${m[3]}` : dateStr;
+}
+
 function buildCard(work){
   const card = document.createElement('div');
   card.className = 'work-card';
   card.dataset.workId = work.id || work.title;
 
+  const thumb = document.createElement('div');
+  thumb.className = 'work-thumb';
   const img = document.createElement('img');
   img.src = work.thumbnail;
   img.alt = work.title;
   img.loading = 'lazy';
-  card.appendChild(img);
+  thumb.appendChild(img);
+  card.appendChild(thumb);
+
+  const caption = document.createElement('div');
+  caption.className = 'work-caption';
 
   const title = document.createElement('span');
-  title.className = 'work-card-title';
+  title.className = 'work-caption-title';
   title.textContent = work.title;
-  card.appendChild(title);
+  caption.appendChild(title);
+
+  const date = formatDate(work.addedAt);
+  if(date){
+    const dateEl = document.createElement('span');
+    dateEl.className = 'work-caption-date';
+    dateEl.textContent = date;
+    caption.appendChild(dateEl);
+  }
+
+  card.appendChild(caption);
 
   card.addEventListener('click', () => openLightbox(work));
   return card;
@@ -138,12 +160,21 @@ function renderGrids(works){
   });
 }
 
+const PLATFORM_LABELS = {
+  youtube: 'YouTubeで見る',
+  vimeo: 'Vimeoで見る',
+  artstation: 'ArtStationで見る'
+};
+
 function openLightbox(work){
   const lightbox = document.getElementById('lightbox');
   const body = document.getElementById('lightbox-body');
   if(!lightbox || !body) return;
 
   body.innerHTML = '';
+
+  const mediaWrap = document.createElement('div');
+  mediaWrap.className = 'lightbox-media';
 
   if(work.platform === 'youtube' || work.platform === 'vimeo'){
     const ratioBox = document.createElement('div');
@@ -153,32 +184,54 @@ function openLightbox(work){
     iframe.allow = 'autoplay; fullscreen; picture-in-picture';
     iframe.allowFullscreen = true;
     ratioBox.appendChild(iframe);
-    body.appendChild(ratioBox);
+    mediaWrap.appendChild(ratioBox);
   }else{
     const img = document.createElement('img');
     img.src = work.thumbnail;
     img.alt = work.title;
-    body.appendChild(img);
+    mediaWrap.appendChild(img);
+  }
+  body.appendChild(mediaWrap);
+
+  const info = document.createElement('div');
+  info.className = 'lightbox-info';
+
+  const titleEl = document.createElement('h3');
+  titleEl.className = 'lightbox-title';
+  titleEl.textContent = work.title;
+  info.appendChild(titleEl);
+
+  const date = formatDate(work.addedAt);
+  if(date){
+    const dateEl = document.createElement('p');
+    dateEl.className = 'lightbox-date';
+    dateEl.textContent = date;
+    info.appendChild(dateEl);
   }
 
-  const caption = document.createElement('div');
-  caption.className = 'lightbox-caption';
-  const titleSpan = document.createElement('span');
-  titleSpan.textContent = work.title;
-  caption.appendChild(titleSpan);
+  if(work.description){
+    const descEl = document.createElement('p');
+    descEl.className = 'lightbox-description';
+    descEl.textContent = work.description;
+    info.appendChild(descEl);
+  }
+
   if(work.sourceUrl){
     const link = document.createElement('a');
+    link.className = 'lightbox-link';
     link.href = work.sourceUrl;
-    link.textContent = '元のページを見る ↗';
+    link.textContent = (PLATFORM_LABELS[work.platform] || '元のページを見る') + ' ↗';
     link.target = '_blank';
     link.rel = 'noopener';
-    caption.appendChild(link);
+    info.appendChild(link);
   }
-  body.appendChild(caption);
+
+  body.appendChild(info);
 
   lightbox.classList.add('is-open');
   lightbox.setAttribute('aria-hidden', 'false');
   document.body.style.overflow = 'hidden';
+  lightbox.scrollTop = 0;
 }
 
 function closeLightbox(){

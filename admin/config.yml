@@ -64,12 +64,17 @@ collections:
                   - { label: "YouTube", value: "youtube" }
                   - { label: "Vimeo", value: "vimeo" }
                   - { label: "ArtStation / 画像", value: "artstation" }
-              - label: "元のページURL(YouTube/Vimeo/ArtStationのURLをそのまま貼る)"
+              - label: "元のページURL(任意。YouTube/Vimeo/ArtStationなど)"
                 name: "sourceUrl"
                 widget: "string"
+                required: false
               - label: "サムネイル画像(空欄ならYouTube/Vimeoから自動取得。ArtStationは必須)"
                 name: "thumbnail"
                 widget: "image"
+                required: false
+              - label: "説明文(任意)"
+                name: "description"
+                widget: "text"
                 required: false
               - label: "追加日"
                 name: "addedAt"
@@ -96,6 +101,10 @@ collections:
                 widget: "string"
                 required: false
               - { label: "サムネイル画像", name: "thumbnail", widget: "image" }
+              - label: "説明文(任意)"
+                name: "description"
+                widget: "text"
+                required: false
               - label: "追加日"
                 name: "addedAt"
                 widget: "datetime"
